@@ -26,7 +26,6 @@ public class InitGeneric implements ServletContextListener {
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		//debug_sdc
 	    System.out.println("##### START "+getClass().getName()+" #################");
 	    try {
             Thread.sleep(3000);
