@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>Restful Service</display-name>
+    <context-param>
+        <!-- this need same with resteasy servlet url-pattern.
+            You need to set the “resteasy.servlet.mapping.prefix” if your servlet-mapping for the resteasy
+            servlet has a url-pattern other than “/*“. In above example, the resteasy servlet url-pattern
+            is “/rest/*“, so you have to set the “resteasy.servlet.mapping.prefix” to “/rest” as well,
+            otherwise,
+            you will hit resource not found error message</description>
+            <param-name>resteasy.servlet.mapping.prefix -->
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <!-- this need same with resteasy servlet url-pattern.
+            You need to set the “resteasy.servlet.mapping.prefix” if your servlet-mapping for the resteasy
+            servlet has a url-pattern other than “/*“. In above example, the resteasy servlet url-pattern
+            is “/rest/*“, so you have to set the “resteasy.servlet.mapping.prefix” to “/rest” as well,
+            otherwise,
+            you will hit resource not found error message</description>
+            <param-name>resteasy.servlet.mapping.prefix -->
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/rest</param-value>
+    </context-param>
+    <listener>
+        <!-- The listener class ResteasyBootstrap is responsible for loading some basic components of
+            resteasy. It also scans the annotated class and registers them as a webservice -->
+        <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+    </listener>
+    
+    <!-- Used to init project DARB Route Planner resources -->
+    <listener>
+        <listener-class>com.sdc.rest.init.InitGeneric</listener-class>
+    </listener>
+    
+    <!-- org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher intercepts and processes the
+        requests -->
+    <servlet>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+</web-app>
